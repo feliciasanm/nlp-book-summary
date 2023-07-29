@@ -2,7 +2,7 @@
 
 Hi, _repository_ ini memuat _**capstone project**_ yang kukerjakan untuk kelas **_Certified Senior Data Scientist_ Narasio Data** (Maret 2022), yakni **membuat pengelompokkan buku-buku yang dianggap mirip berdasarkan rangkuman bukunya, menggunakan NLP**. Dalam prosesnya, digunakan beberapa teknik menarik seperti **Doc2Vec, NER, dan K-Means**. Cukup _excited_ dengan proyek ini karena merasa menggunakan teknik yang _adventurous_ kali ini!
 
-**Berikut ini link untuk [PPT cantik hasil presentasi _capstone_](https://drive.google.com/file/d/10-c2Gkyq8DTOTcNPX8itJ8ekK0c02CvF/view?usp=sharing) (sama dengan PDF _slide_ yang ada di _repository_!)** ❤️
+**Berikut ini link untuk [PPT cantik hasil presentasi _capstone_](https://drive.google.com/file/d/1CHHD8UVev5pfxwq21x-i34LvCXhaXwF4/view?usp=sharing) (sama dengan PDF _slide_ yang ada di _repository_!)** ❤️
 
 _**Note:** Proyek sudah selesai sampai tahap modelling (bagian NLP dan K-Means selesai), namun bagian yang mengevaluasi isi cluster satu per satu belum dipublikasi karena ingin ada _reworking__ 🚧
 
@@ -75,17 +75,13 @@ _Entitas yang digunakan: 'NORP', 'ORG', 'GPE', 'LOC', 'EVENT'_
 #### 3. _Feature_ Hasil EDA Lainnya
 **Dua _feature_ tambahan** digunakan setelah dievaluasi pada tahap EDA dan mempertimbangkan _problem statement_ proyek.
 - **Periode publikasi juga dapat mempengaruhi gaya penulisan**, sehingga periode publikasi ditambahkan setelah dilakukan _cut_ manual
-- **Panjang _summary_ merupakan _proxy_** yang cukup berguna untuk mengukur **kompleksitas plot buku**
-
-![image](https://github.com/feliciasanm/bpi-etl-de/assets/47961812/3c31a7c3-a6bf-4e7d-971d-0c3cdbe6a825)
+- **Panjang _summary_ merupakan _proxy_** yang cukup berguna untuk mengukur **kompleksitas plot buku** (memang kompleks atau sebaliknya tidak bisa dideskripsikan)
 
 
 ### III. Pengelompokkan _with_ Clustering
 **Metode K-Means** digunakan setelah **semua _feature_ dilakukan _scaling_** (karena K-Means "peka dengan jarak"). 
 
 K-Means dipilih karena **cukup sering dipakai untuk problem serupa di NLP**, sehingga menjadi pilihan yang masuk akal dan cukup aman (walaupun ada potensi alternatif lain seperti DBSCAN). Karena K-Means merupakan teknik _unsupervised learning_ yang **memerlukan jumlah _cluster_** , maka dilakukan baik **_elbow method_ maupun _silhoutte score_** untuk menentukan jumlah _cluster_. Di luar dari _code_ yang ditampilkan di sini, sebenarnya **beberapa variasi angka _cluster_** juga telah **dicoba manual** dan dicek angka mana yang secara **_cluster_ tidak terlalu _sparse_** isinya untuk pengelompokkan buku. 
-
-![image](https://github.com/feliciasanm/bpi-etl-de/assets/47961812/d280ce2a-3ec6-46b2-8d86-e73fd9887798)
 
 _Akhirnya, dipilihlah enam sebagai jumlah _cluster_ dan dilakukanlah proses _clustering_._
 
