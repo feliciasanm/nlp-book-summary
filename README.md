@@ -6,10 +6,12 @@ Hi, _repository_ ini memuat _**capstone project**_ yang kukerjakan untuk kelas *
 
 _**Note:** Proyek sudah selesai sampai tahap modelling (bagian NLP dan K-Means selesai), namun bagian yang mengevaluasi isi cluster satu per satu belum dipublikasi karena ingin ada _reworking__ 🚧
 
+
 ## Problem Setting
 **Seorang pemilik toko buku** ingin mengadakan **pameran buku berskala besar**, dan dia memerlukan bantuan untuk **menyusun letak buku saat pameran** agar tepat dan buku-buku dengan **alur yang serupa** berada **di bagian yang sama**.
 
 **Data yang diberikan** untuk tujuan tersebut memuat **beberapa metadata**, termasuk **summary bukunya**.
+
 
 ### Problem Translation
 | Question    | Problem                                                                                 | How to Solve |
@@ -17,6 +19,7 @@ _**Note:** Proyek sudah selesai sampai tahap modelling (bagian NLP dan K-Means s
 | _What?_     | Event pameran buku yang segera diadakan seorang pemilik toko buku perlu disukseskan     | Untuk membantu mendukung acaranya, maka buku jualannya akan dianalisis. |
 | _How Much?_ | Skala jumlah buku yang terlibat sangat banyak untuk dipersiapkan secara manual          | Agar dapat menangani skala buku yang banyak, digunakan _machine learning_ untuk membantu mengatur bukunya. |
 | _How?_      | Topik buku-buku yang ada perlu diatur dengan cara yang menarik calon pengunjung/pembeli | Agar layout pameran menarik calon pengunjung/pembeli, pengaturan buku dibantu dengan NLP, terutama berdasarkan _book summary_/alur bukunya. |
+
 
 ### Data
 Data diberikan dalam satu file, yakni **`nlp.csv`**, dan **memiliki 33,722 baris serta 8 kolom**. 
@@ -35,8 +38,10 @@ _Secara total, terdapat **~16,600 buku dan ~4,700 penulis unik** di dalam datase
 
 **Berdasarkan pencarian di internet**, nampaknya data ini merupakan versi **modifikasi dari [CMU Book Dataset](https://www.cs.cmu.edu/~dbamman/booksummaries.html)**.
 
+
 ## Metode
 Secara teknis, **setiap _summary_ buku dapat dihitung sebagai dokumen terpisah**, sehingga problem ini bisa dikatakan adalah **problem _document similarity_**. Karena **sebagian besar data berupa teks** (kecuali tanggal nantinya), maka **digunakan teknik NLP** untuk menanganinya. Hasil penanganan data kemudian akan **dikelompokkan dengan _clustering_ menggunakan K-Means**.
+
 
 ### I. Preprocessing
 Dibagi menjadi **_preprocessing_ umum** untuk data dan **_preprocessing_** yang lebih spesifik ke **NLP** (elaborasi tambahan juga disertakan untuk _notable preprocessing_).
@@ -52,6 +57,7 @@ Dibagi menjadi **_preprocessing_ umum** untuk data dan **_preprocessing_** yang 
 3. **_Tokenization_** (bahasa Inggris, menggunakan `NLTK`)
 4. Penghilangan **_stopwords_** (korpus bahasa Inggris `NLTK` + temuan hasil EDA)
 5. **_Lemmatization_** (menggunakan `WordNetLemmatizer` dari `NLTK`) & **_Stemming_** (menggunakan `SnowballStemmer` dari `NLTK`)
+
 
 ### II. Feature Engineering
 Terdapat 3 sumber _feature_ yang akan dipakai untuk _clustering_ K-Means:
@@ -77,13 +83,18 @@ _Entitas yang digunakan: 'NORP', 'ORG', 'GPE', 'LOC', 'EVENT'_
 - **Periode publikasi juga dapat mempengaruhi gaya penulisan**, sehingga periode publikasi ditambahkan setelah dilakukan _cut_ manual
 - **Panjang _summary_ merupakan _proxy_** yang cukup berguna untuk mengukur **kompleksitas plot buku** (memang kompleks atau sebaliknya tidak bisa dideskripsikan)
 
+![image](https://github.com/feliciasanm/nlp-book-summary/assets/47961812/a818016e-1990-4888-a089-a0d3fffaf2c8)
+
 
 ### III. Pengelompokkan _with_ Clustering
 **Metode K-Means** digunakan setelah **semua _feature_ dilakukan _scaling_** (karena K-Means "peka dengan jarak"). 
 
 K-Means dipilih karena **cukup sering dipakai untuk problem serupa di NLP**, sehingga menjadi pilihan yang masuk akal dan cukup aman (walaupun ada potensi alternatif lain seperti DBSCAN). Karena K-Means merupakan teknik _unsupervised learning_ yang **memerlukan jumlah _cluster_** , maka dilakukan baik **_elbow method_ maupun _silhoutte score_** untuk menentukan jumlah _cluster_. Di luar dari _code_ yang ditampilkan di sini, sebenarnya **beberapa variasi angka _cluster_** juga telah **dicoba manual** dan dicek angka mana yang secara **_cluster_ tidak terlalu _sparse_** isinya untuk pengelompokkan buku. 
 
+![image](https://github.com/feliciasanm/nlp-book-summary/assets/47961812/8307d6a4-5744-4710-89e4-38b83cc299c2)
+
 _Akhirnya, dipilihlah enam sebagai jumlah _cluster_ dan dilakukanlah proses _clustering_._
+
 
 ## Kata Penutup
 Seperti biasa, **detail lengkap pembuatannya tentu ada pada _notebook code_ yang telah tersedia di _repository_ ini!** 
